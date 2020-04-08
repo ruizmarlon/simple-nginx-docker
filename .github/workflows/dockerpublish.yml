@@ -55,6 +55,8 @@ jobs:
 
       - name: Push image
         run: |
+          echo $IMAGE_ID
+          echo $VERSION
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           
           # Change all uppercase to lowercase
@@ -67,7 +69,7 @@ jobs:
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          [ "$VERSION" == "master" ] && VERSION=v1
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
